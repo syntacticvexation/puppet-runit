@@ -63,18 +63,24 @@ define runit::service (
         force => true,
       ;
     "${svbase}/run":
-      content => $content ? {
-        undef   => template('runit/run.erb'),
-        default => $content,
+      content => $source ? {
+        undef => $content ? {
+          undef   => template('runit/run.erb'),
+          default => $content,
+        },
+        default => undef,
       },
       source  => $source,
       ensure  => $ensure,
       mode    => 755,
       ;
     "${svbase}/finish":
-      content => $finish_content ? {
-        undef   => template('runit/finish.erb'),
-        default => $finish_content,
+      content => $finish_source ? {
+        undef => $finish_content ? {
+          undef   => template('runit/finish.erb'),
+          default => $finish_content,
+        },
+        default => undef,
       },
       source  => $finish_source,
       ensure  => $ensure,
