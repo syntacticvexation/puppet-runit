@@ -31,11 +31,15 @@ define runit::service::env( $service, $envname = $title, $value, $ensure = prese
       # all unmanaged envs. will be removed
       recurse => true,
       purge   => true,
+      owner   => $user,
+      group   => $group,
     }
   }
 
   file { "${envdir}/${envname}":
     ensure => $ensure,
     content => "${value}\n",
+    owner   => $user,
+    group   => $group,
   }
 }
