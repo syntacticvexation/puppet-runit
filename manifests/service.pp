@@ -86,6 +86,21 @@ define runit::service (
       ensure  => $ensure,
       mode    => 755,
       ;
+    "${svbase}/supervise":
+      ensure => directory,
+      ;
+    "${svbase}/supervise/ok":
+      ;
+    "${svbase}/supervise/control":
+      ;
+    "${svbase}/supervise/status":
+      ;
+    "${svbase}/supervise/lock":
+      ;
+    "${svbase}/supervise/pid":
+      ;
+    "${svbase}/supervise/stat":
+      ;
   }
 
   # eventually enabling/disabling the service
