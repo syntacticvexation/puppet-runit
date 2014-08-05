@@ -20,7 +20,7 @@
 #
 #   runit::service { $service: }
 #
-define runit::service::env( $service, $envname = $title, $value, $ensure = present ) {
+define runit::service::env( $service, $envname = $title, $value, $ensure = present, $user = 'root', $group = 'root'  ) {
 
   $envdir = "/etc/sv/${service}/env"
 

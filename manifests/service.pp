@@ -40,7 +40,7 @@ define runit::service (
   }
 
   # resource defaults
-  File { owner => root, group => root, mode => 644 }
+  File { owner => $user, group => $group, mode => 644 }
 
   $svbase = "/etc/sv/${name}"
 
