@@ -21,6 +21,7 @@ define runit::service (
   $logger  = true,       # shall we setup an logging service;  if you use 'command' before,
                          # all output from command will be logged automatically to $logdir/current
   $logdir  = undef,
+  $logger_options = '-tt',
   $timeout = 7,          # service restart/stop timeouts (only relevant for 'enabled' services)
   $minimize_non_root_permissions = false # reduce number of files with permissions for non-root users
 ) {
