@@ -21,7 +21,9 @@ define runit::service (
   $logger  = true,       # shall we setup an logging service;  if you use 'command' before,
                          # all output from command will be logged automatically to $logdir/current
   $logdir  = undef,
-  $timeout = 7           # service restart/stop timeouts (only relevant for 'enabled' services)
+  $logger_options = '-tt',
+  $timeout = 7,          # service restart/stop timeouts (only relevant for 'enabled' services)
+  $minimize_non_root_permissions = false # reduce number of files with permissions for non-root users
 ) {
 
   # using the following construct, because '$logdir = "${rundir}/log"' in the
@@ -63,23 +65,49 @@ define runit::service (
         force => true,
       ;
     "${svbase}/run":
-      content => $content ? {
-        undef   => template('runit/run.erb'),
-        default => $content,
+      content => $source ? {
+        undef => $content ? {
+          undef   => template('runit/run.erb'),
+          default => $content,
+        },
+        default => undef,
       },
       source  => $source,
       ensure  => $ensure,
       mode    => '755',
       ;
     "${svbase}/finish":
-      content => $finish_content ? {
-        undef   => template('runit/finish.erb'),
-        default => $finish_content,
+      content => $finish_source ? {
+        undef => $finish_content ? {
+          undef   => template('runit/finish.erb'),
+          default => $finish_content,
+        },
+        default => undef,
       },
       source  => $finish_source,
       ensure  => $ensure,
       mode    => '755',
       ;
+    "${svbase}/supervise":
+      ensure => directory,
+      ;
+    "${svbase}/supervise/ok":
+      ;
+    "${svbase}/supervise/control":
+      ;
+  }
+
+  if !$minimize_non_root_permissions {
+    file {
+      "${svbase}/supervise/status":
+        ;
+      "${svbase}/supervise/lock":
+        ;
+      "${svbase}/supervise/pid":
+        ;
+      "${svbase}/supervise/stat":
+        ;
+    }
   }
 
   # eventually enabling/disabling the service
