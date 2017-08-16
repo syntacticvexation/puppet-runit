@@ -1,8 +1,6 @@
 = README
-Author:: Markus Strauss (mailto:markus@itstrauss.eu)
-Version:: 0.1, 2011-10-27
 
-This is a very basic module to manage the runit[http://smarden.org/runit/] service supervisor.
+This is a very basic module to manage the runit[http://smarden.org/runit/] service supervisor based on Markus Strauss original puppet module but with additional Puppet 5 goodness.
 
 == Example Usage
 

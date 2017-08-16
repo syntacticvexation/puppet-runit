@@ -1,8 +1,8 @@
-name          'steakknife-runit'
-version       '0.1.1'
+name          'puppet-runit'
+version       '0.2'
 summary       'runit module for deb/rpm-based systems'
 description   'maintained fork of mstrauss/puppet-runit'
 
-source        'https://github.com/steakknife/steakknife-runit.git'
-project_page  'https://github.com/steakknife/steakknife-runit'
+source        'https://github.com/syntacticvexation/puppet-runit.git'
+project_page  'https://github.com/syntacticvexation/puppet-runit'
 license       'BSD'
