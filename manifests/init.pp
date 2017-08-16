@@ -1,5 +1,5 @@
-class runit( $ensure = present ) {
-  package { runit:
+class runit( $ensure, $package) {
+  package { $package:
     ensure => $ensure
   }
 

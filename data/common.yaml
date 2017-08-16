@@ -1,0 +1,3 @@
+---
+runit::ensure: present
+runit::package: runit
